@@ -21,13 +21,9 @@ function banner (options) {
 `
 
 	if (!options.source) throw new Error(`File not found!`)
-	else {
-		glob(options.source, (err, files) => {
-			if (err) throw err
-			files.map(file => prependFile.sync(file, template))
-			process.exit(0)
-		})
-	}
+
+	const files = glob.sync(options.source)
+	files.map(file => prependFile.sync(file, template))
 }
 
 module.exports = banner
